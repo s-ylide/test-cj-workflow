@@ -1,0 +1,32 @@
+name: Check by compiler_jikken command
+run-name: Testing using compiler_jikken command
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/workflows/check-jikken.yml
+
+jobs:
+  check:
+    name: Run compiler_jikken command
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set-up OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.1.0
+
+      - name: Install compiler_jikken command
+        run: opam pin add -y compiler_jikken https://github.com/s-ylide/compiler_jikken.git#ci-mode
+
+      - name: Run check
+        run: compiler_jikken --verbose --ci 4 --toi 2 --toi 3
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-artifact
+          path: artifact/
