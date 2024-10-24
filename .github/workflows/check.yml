@@ -21,7 +21,7 @@ jobs:
 
       - name: Run check
         id: check
-        run: eval $(opam env) && compiler_jikken --debug --ci 4 --toi 2 --toi 3
+        run: eval $(opam env) && compiler_jikken --debug --ci 1 --toi 2 --toi 3
         continue-on-error: true
       - name: Debug Artifacts
         run: ls artifact
