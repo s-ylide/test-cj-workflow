@@ -20,9 +20,9 @@ jobs:
         run: opam pin add -y compiler_jikken https://github.com/s-ylide/compiler_jikken.git#feat/ci-mode
 
       - name: Debug dune
-        run: find . -name dune
+        run: git ls-files dune **/dune
       - name: Debug Rust
-        run: find . -name Cargo.toml
+        run: git ls-files Cargo.toml **/Cargo.toml
       - name: Run check
         run: eval $(opam env) && compiler_jikken --debug --ci 4 --toi 2 --toi 3
         continue-on-error: true
