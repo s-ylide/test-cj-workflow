@@ -20,13 +20,6 @@ jobs:
         id: check
         run: eval $(opam env) && compiler_jikken --debug --ci 0 --toi 99
         continue-on-error: true
-      - name: Debug Artifacts
-        run: ls artifact
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: check-artifact
-          path: artifact/
       - run: exit 1
         if: steps.check.outcome == 'failure'
